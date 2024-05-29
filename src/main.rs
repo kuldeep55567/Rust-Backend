@@ -25,11 +25,11 @@ async fn main() {
         .await
     {
         Ok(pool) => {
-            println!("✅ Connection to the database is successful!");
+            println!("✅ MySQL Connection Successful !");
             pool
         }
         Err(err) => {
-            println!("❌ Failed to connect to the database: {:?}", err);
+            println!("❌ Failed to connect to the Database: {:?}", err);
             std::process::exit(1);
         }
     };
@@ -41,7 +41,7 @@ async fn main() {
 
     let app = create_router(Arc::new(AppState { db: pool.clone() })).layer(cors);
 
-    println!("✅ Server started successfully at 0.0.0.0:8080");
+    println!("✅ Server is listening on Port 8080 !");
 
     let listener = TcpListener::bind("0.0.0.0:8080").await.unwrap();
     axum::serve(listener, app.into_make_service())
